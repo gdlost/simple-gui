@@ -1,0 +1,4 @@
+Que se necesita:
+ - En Slider.cc se necesita codigo que ajuste correctamente el knob.
+ - A cada widget se le pasan coordenadas relativas
+ - Implementar un LM
