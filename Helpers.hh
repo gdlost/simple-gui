@@ -5,14 +5,19 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_render.h>
 #include <iostream>
+
+// Todas las ventanas son rectangulos :D
 class Rect : public SDL_Rect {
     public:
     Rect();
     Rect(int w, int h);
 
     bool hasPointIn(int x, int y);
+    void move(int x, int y);
+    void moveRelative(int dx, int dy);
+    void resize(int w, int h);
+    void setBounds(int x, int y, int w, int h);
 };
-
 
 class RGBA {
     private:
@@ -37,7 +42,7 @@ class RGBA {
     static RGBA Fuchsia();
     static RGBA Purple();
 
-
+    RGBA();
     RGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     void sdl2_SetRenderDrawColor(SDL_Renderer *rend);
 };

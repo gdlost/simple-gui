@@ -17,7 +17,7 @@ class Button : public Widget {
     Button();
     Button(int x, int y);
 
-    int notify_mouse(int cx, int cy, int button_left);
+    int notify_mouse(int cx, int cy, int rcx, int rcy, int button_left);
     virtual void on_click() = 0;
 
     void render(SDL_Renderer *rend);

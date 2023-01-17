@@ -3,19 +3,17 @@
 #include <SDL2/SDL_render.h>
 
 Button::Button() {
-    this->outline = Rect(100, 28);
+    resize(100, 28);
 }
 
 Button::Button(int x, int y) {
-    this->outline = Rect(100, 28);
-    this->outline.x = x;
-    this->outline.y = y;
+    setBounds(x, y, 100, 28);
 }
 
 // Esta funcion, solo se llama en caso de que el cursor este DENTRO del
 // boton, o en caso de que processing_events = true
 // Retorna 1, si es que en el siguiente frame se debe verificar algo
-int Button::notify_mouse(int cx, int cy, int button_left) {
+int Button::notify_mouse(int cx, int cy, int rcx, int rcy, int button_left) {
     switch (this->state) {
         case sBUTTON_IDLE: {
             this->state = sBUTTON_HOVER;
@@ -25,7 +23,7 @@ int Button::notify_mouse(int cx, int cy, int button_left) {
             break;
         }
         case sBUTTON_HOVER: {
-            if (!this->inside_my_bounds(cx, cy)) {
+            if (!hasPointIn(cx, cy)) {
                 this->state = sBUTTON_IDLE;
                 return 0;
             } else if (button_left == BUTTON_DOWN) {
@@ -40,7 +38,7 @@ int Button::notify_mouse(int cx, int cy, int button_left) {
                 this->state = sBUTTON_HOVER;
                 this->on_click();
                 return 1;
-            } else if (!this->inside_my_bounds(cx, cy)) {
+            } else if (!hasPointIn(cx, cy)) {
                 this->state = sBUTTON_IDLE;
                 return 0;
             }
@@ -60,7 +58,7 @@ void Button::render(SDL_Renderer *rend) {
         case sBUTTON_ACTIVE: active_color.sdl2_SetRenderDrawColor(rend); break;
         case sBUTTON_HOVER: hover_color.sdl2_SetRenderDrawColor(rend); break;
     }
-    SDL_RenderFillRect(rend, &(this->outline));
+    SDL_RenderFillRect(rend, (this));
     SDL_RestoreRenderDrawColor();
 
 }

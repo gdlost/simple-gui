@@ -23,7 +23,7 @@ class Slider : public Widget {
     Slider();
     Slider(int x, int y);
     void render(SDL_Renderer *rend);
-    int notify_mouse(int,int,int);
+    int notify_mouse(int cx, int cy, int rcx, int rcy, int button_left);
     void calculate_knob();
     virtual void on_click() = 0;
 };

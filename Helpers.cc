@@ -11,20 +11,28 @@ Rect::Rect(int w, int h) {
 }
 
 bool Rect::hasPointIn(int x, int y) {
-#if 0
-    std::cout << "x: " << x
-        << ", y: " << y
-        << ", this->x: " << this->x
-        << ", this->y: " << this->y
-        << ", this->w: " << this->w
-        << ", this->h: " << this->h
-        << '\n';
-    bool cond = ((this->x < x && x < this->x + this->w)
-        && (this->y < y && y < this->y + this->w));
-    std::cout << cond << '\n';
-#endif
     return ((x >= this->x && x <= this->x + this->w)
         && (y >= this->y && y <= this->y + this->h));
+}
+
+void Rect::move(int x, int y) {
+    this->x = x;
+    this->y = y;
+}
+
+void Rect::moveRelative(int dx, int dy) {
+    this->x += dx;
+    this->y += dy;
+}
+
+void Rect::resize(int w, int h) {
+    this->w = w;
+    this->h = h;
+}
+
+void Rect::setBounds(int x, int y, int w, int h) {
+    move(x, y);
+    resize(w, h);
 }
 
 // ---
@@ -93,6 +101,9 @@ RGBA RGBA::Purple() {
     return RGBA(0x80, 0x00, 0x80, 0xff);
 }
 
+
+RGBA::RGBA()
+    : r(0xff), g(0xff), b(0xff), a(0xff) {}
 
 RGBA::RGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
         : r(r), g(g), b(b), a(a) {}
