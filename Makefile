@@ -1,4 +1,4 @@
-SRC=Helpers.cc Window.cc Widget.cc Button.cc main.cc
+SRC=Helpers.cc Window.cc Widget.cc Button.cc Checkbox.cc main.cc
 OBJ=$(patsubst %.cc,%.o,$(SRC))
 CPPFLAGS=$(shell sdl2-config --cflags)
 
